@@ -658,6 +658,8 @@
             document.getElementById("s22-text1").value = [property_img, property_type, property_price, property_title, property_bedrooms, property_bathrooms, property_area, property_floor, property_parking]
         }
 
+        var counter_sch = 0;
+        var counter_of_existing_properties = 0;
         function MySchedule(){
             document.getElementById("wrapper7").style.display = "none"
             document.getElementById("wrapper2").style.display = "none"
@@ -691,12 +693,17 @@
             var data_floor = "";
             var data_parking = "";
         
-            var counter_sch = 0;
+            
             if(data_properties.length > 0)
             {
-                if(counter_sch > 0)
+                if(counter_of_existing_properties > 0 )
                 {
-                    document.getElementById("schedule_property_div").remove();
+                    console.log(counter_of_existing_properties + "asdasd")
+                    for(i =0;i < counter_of_existing_properties; i++)
+                    {
+                        document.getElementById("schedule_property_div").remove();
+                    }
+                    
                 }
                 for(i = 0; i < data_properties.length;i++)
                 {
@@ -849,7 +856,7 @@
                                 `
                                 counter_sch += 1;
                                 document.getElementById("myschedule").appendChild(schedule_property_div)
-                                
+                                counter_of_existing_properties += 1;
 
                                 date_1 = "";
                                 data_img = "";
