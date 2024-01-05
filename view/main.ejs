@@ -692,7 +692,13 @@
             var data_area = "";
             var data_floor = "";
             var data_parking = "";
-        
+
+            const checker = document.getElementById("user_email").innerHTML
+            if(checker === "no")
+            {
+                data_properties = []
+            }
+
             
             if(data_properties.length > 0)
             {
