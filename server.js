@@ -113,14 +113,16 @@ app.post("/scheduleavisit", async (req,res)=>{
 })
 
 app.get("/myschedule", async (req,res)=>{
-    if(app.locals.schedule != "no")
+    if(app.locals.schedule != "no" && app.locals.user_email != "no")
     {
         const data2 = await collection_signup.findOne({email: app.locals.user_email})
         app.locals.schedule = data2.scheduled_list
     }
     console.log(app.locals.schedule)
+    console.log(app.locals.user_email)
     res.status(204).send({});
 })
+
 
 //signup code
 
