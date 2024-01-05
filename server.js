@@ -20,14 +20,22 @@ app.locals.name_hello = "no";
 app.locals.user_email = "no";
 app.locals.schedule = "no";
 app.locals.counter1 = 0
+app.locals.logedin = 0;
 
-app.get("/", async (req,res)=>{
+
+app.get("/logedin", async(req,res)=>{
     if(app.locals.counter1 > 0)
     {
         const data2 = await collection_signup.findOne({email: app.locals.user_email})
         app.locals.schedule = data2.scheduled_list
         console.log(app.locals.schedule)
     }
+    res.render(__dirname + "/view/main.ejs",{hello_object: app.locals.name_hello, users_email: app.locals.user_email, schedule_data:app.locals.schedule})
+    app.locals.invalid_data = 0;
+    app.locals.invalid_data_login = 0;
+})
+app.get("/", async (req,res)=>{
+    
     res.render(__dirname + "/view/main.ejs",{hello_object: app.locals.name_hello, users_email: app.locals.user_email, schedule_data:app.locals.schedule})
     app.locals.invalid_data = 0;
     app.locals.invalid_data_login = 0;
@@ -84,13 +92,10 @@ app.post("/contactus",async (req,res)=>{
     main().catch(console.error);
 
     //res.status(204).send()
-    res.redirect("/")
+    res.redirect("/logedin")
 })
 
 app.post("/scheduleavisit", async (req,res)=>{
-    console.log(req.body.input_schedule)
-    console.log(req.body.property_data)
-
 
     const data_schedule = "!"+req.body.input_schedule + "#" +req.body.property_data
 
@@ -104,7 +109,7 @@ app.post("/scheduleavisit", async (req,res)=>{
     console.log(user_id)
     console.log(find_data.scheduled_list)
 
-    res.redirect("/")
+    res.redirect("/logedin")
 })
 
 app.get("/myschedule", async (req,res)=>{
@@ -159,7 +164,7 @@ app.post("/signupdata",async (req,res)=>{
         app.locals.invalid_data = 0
         app.locals.name_hello = data.name;
         app.locals.user_email = data.email;
-        res.redirect("/")
+        res.redirect("/logedin")
         
     }
 
@@ -179,7 +184,7 @@ app.post("/logindata",async (req,res)=>{
             {
                 app.locals.name_hello = check.name
                 app.locals.user_email = check.email
-                res.redirect("/")
+                res.redirect("/logedin")
             }else{
                 app.locals.invalid_data_login += 1;
                 res.redirect("/login")
