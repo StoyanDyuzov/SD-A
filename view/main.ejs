@@ -676,7 +676,6 @@
             var data_properties = document.getElementById("data1").innerHTML;
 
             
-
             var counter1 = 0;
             var counter2 = 0;
             var counter3 = 0;
@@ -692,16 +691,18 @@
             var data_area = "";
             var data_floor = "";
             var data_parking = "";
-
+        
+            var stopper = 0;
             const checker = document.getElementById("user_email").innerHTML
             if(checker === "no")
             {
                 data_properties = []
             }
 
-            
             if(data_properties.length > 0)
             {
+                console.log(counter_of_existing_properties + "asdasd")
+
                 if(counter_of_existing_properties > 0 )
                 {
                     console.log(counter_of_existing_properties + "asdasd")
@@ -711,6 +712,8 @@
                     }
                     
                 }
+                
+                
                 for(i = 0; i < data_properties.length;i++)
                 {
                     
@@ -861,9 +864,11 @@
                                 </div>
                                 `
                                 counter_sch += 1;
-                                document.getElementById("myschedule").appendChild(schedule_property_div)
-                                counter_of_existing_properties += 1;
 
+                                document.getElementById("myschedule").appendChild(schedule_property_div)
+                                
+                                counter_of_existing_properties += 1;
+                                console.log(counter_of_existing_properties)
                                 date_1 = "";
                                 data_img = "";
                                 data_type = "";
