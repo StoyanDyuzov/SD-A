@@ -35,7 +35,9 @@ app.get("/logedin", async(req,res)=>{
     app.locals.invalid_data_login = 0;
 })
 app.get("/", async (req,res)=>{
-    
+    app.locals.user_email = "no"
+    app.locals.schedule_data = "no"
+    app.locals.name_hello = "no"
     res.render(__dirname + "/view/main.ejs",{hello_object: app.locals.name_hello, users_email: app.locals.user_email, schedule_data:app.locals.schedule})
     app.locals.invalid_data = 0;
     app.locals.invalid_data_login = 0;
@@ -122,7 +124,6 @@ app.get("/myschedule", async (req,res)=>{
     console.log(app.locals.user_email)
     res.status(204).send({});
 })
-
 
 //signup code
 
